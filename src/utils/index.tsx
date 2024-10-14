@@ -2,7 +2,7 @@ import { Suspense } from "react"
 
 const Loading = () => {
   return (
-    <div>Loading</div>
+    <div className="w-screen h-screen flex items-center justify-center">Loading</div>
   )
 }
 
