@@ -1,13 +1,13 @@
 import { lazy, LazyExoticComponent } from "react";
 import { useRoutes } from "react-router-dom";
-import { SuspenseComponent as Suspense } from "../utils";
+import { SuspenseComponent as Suspense } from "../../utils";
 
 const Login: LazyExoticComponent<any> = lazy(() => new Promise(resolve => {
-    setTimeout(() => resolve(import('../pages/Login/Login')), 1000);
+    setTimeout(() => resolve(import('../../pages/RegisterUser/Login/Login')), 1000);
   }));
-const Register : LazyExoticComponent<any> = lazy(() => import('../pages/Register/Register'))
+const Register : LazyExoticComponent<any> = lazy(() => import('../../pages/RegisterUser/Register/Register'))
 
-const Routers = () => {
+const RegisterRoutes = () => {
     return useRoutes ([
         {
             path: '/',
@@ -20,4 +20,4 @@ const Routers = () => {
     ])
 }
 
-export default Routers
+export default RegisterRoutes

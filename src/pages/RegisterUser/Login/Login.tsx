@@ -1,11 +1,32 @@
-import { Link } from 'react-router-dom';
-import Google from '../../assets/google.svg'
-import Logo from '../../assets/logo.svg'
+import { Link, useNavigate } from 'react-router-dom';
+import Google from '../../../assets/google.svg'
+import Logo from '../../../assets/logo.svg'
+import { useLoginUserMutation } from '../../../redux/api/users-api';
+import { useContext } from 'react';
+import { Context } from '../../../context/MainContext';
 const Login = () => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const navigate = useNavigate();
+  const context = useContext(Context)
+  const [loginUser] = useLoginUserMutation()
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    e.currentTarget.reset();
+    const target = new FormData(e.target as HTMLFormElement);
+    const data = {
+      username: target.get("username"),
+      password: target.get("password"),
+    };
+    window.localStorage.setItem('userData', JSON.stringify(data))
+  
+    try {
+      const response = await loginUser(data).unwrap();
+      console.log(response);
+      context?.setToken(true);
+      navigate('/');
+    } catch (error) {
+      console.error('Login failed:', error); 
+    }
   };
+  
 
   return (
     <div className="w-screen h-screen flex">
@@ -19,12 +40,12 @@ const Login = () => {
           <p className="mt-[15px] text-[#7878A3] text-center">Welcome back! Please enter your details.</p>
           <form className="flex flex-col gap-[20px]" onSubmit={handleSubmit}>
             <label className="flex flex-col gap-[12px]">
-              <span className="text-white">Email</span>
-              <input type="email" required className="w-[400px] p-[10px] bg-[#1F1F22] text-white outline-none" />
+              <span className="text-white capitalize">username</span>
+              <input type="text" required name='username' className="w-[400px] p-[10px] bg-[#1F1F22] text-white outline-none" />
             </label>
             <label className="flex flex-col gap-[12px]">
               <span className="text-white">Password</span>
-              <input type="password" required className="w-[400px] p-[10px] bg-[#1F1F22] text-white outline-none" />
+              <input type="password" name='password' required className="w-[400px] p-[10px] bg-[#1F1F22] text-white outline-none" />
             </label>
             <button type="submit" className="text-white w-full bg-[#877EFF] py-[10px] rounded-md">Log In</button>
           </form>

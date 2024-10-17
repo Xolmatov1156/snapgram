@@ -7,3 +7,11 @@
     background-repeat: no-repeat;
     background-size: cover;
 }
+
+.active {
+    background-color: #877EFF;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}

@@ -1,11 +1,11 @@
-import './App.css'
-import Routers from './router'
+import { useContext } from "react";
+import "./App.css";
+import { Context } from "./context/MainContext";
+import RegisterRoutes from "./router/Register";
+import DashboardRoutes from "./router/Dashboard";
 const App = () => {
-  return (
-    <>
-    <Routers/>
-    </>
-  )
-}
+  const context = useContext(Context);
+  return context?.token ? <DashboardRoutes /> : <RegisterRoutes />;
+};
 
-export default App
+export default App;
