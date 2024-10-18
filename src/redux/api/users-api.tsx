@@ -8,6 +8,7 @@ export const productApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["User"],
     }),
     loginUser: build.mutation({
       query: (body) => ({
@@ -15,17 +16,32 @@ export const productApi = api.injectEndpoints({
         method: "POST",
         body,
       }),
+      invalidatesTags: ["User"],
     }),
     getUserByUsername: build.query({
       query: (name) => ({
         url: `/api/user/profile/${name}`,
       }),
+      providesTags: ["User"],
     }),
     getUsers: build.query({
       query: () => "/api/user/all",
+      providesTags: ["User"],
+    }),
+    follow: build.mutation({
+      query: (username) => ({
+        url: `/api/user/${username}`,
+        method: "POST",
+      }),
+      invalidatesTags: ["User"],
     }),
   }),
 });
 
-export const { useCreateUserMutation, useGetUserByUsernameQuery, useLoginUserMutation, useGetUsersQuery } =
-  productApi;
+export const {
+  useCreateUserMutation,
+  useGetUserByUsernameQuery,
+  useFollowMutation,
+  useLoginUserMutation,
+  useGetUsersQuery,
+} = productApi;

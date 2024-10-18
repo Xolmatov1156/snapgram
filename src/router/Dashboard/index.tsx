@@ -1,95 +1,31 @@
-import { lazy, LazyExoticComponent } from "react";
-import { useRoutes } from "react-router-dom";
-import { SuspenseComponent as Suspense } from "../../utils";
+import { Route, Routes } from "react-router-dom";
+import Home from "../../pages/Dashboard/Home/Home";
+import Create from "../../pages/Dashboard/Create";
+import Chats from "../../pages/Dashboard/Chats";
+import Explore from "../../pages/Dashboard/Explore";
+import People from "../../pages/Dashboard/People";
+import Reels from "../../pages/Dashboard/Reels";
+import Saved from "../../pages/Dashboard/Saved";
+import LeftSidebar from "../../components/LeftSidebar";
 
-const Home: LazyExoticComponent<any> = lazy(
-  () => import("../../pages/Dashboard/Home/Home")
-);
-const Create: LazyExoticComponent<any> = lazy(
-  () => import("../../pages/Dashboard/Create")
-);
-const Chats: LazyExoticComponent<any> = lazy(
-  () => import("../../pages/Dashboard/Chats")
-);
-const Explore: LazyExoticComponent<any> = lazy(
-  () => import("../../pages/Dashboard/Explore")
-);
-const People: LazyExoticComponent<any> = lazy(
-  () => import("../../pages/Dashboard/People")
-);
-const Reels: LazyExoticComponent<any> = lazy(
-  () => import("../../pages/Dashboard/Reels")
-);
-const Saved: LazyExoticComponent<any> = lazy(
-  () => import("../../pages/Dashboard/Saved")
-);
 function DashboardRoutes() {
-  return useRoutes([
-    {
-      path: "/",
-      element: (
-        <Suspense>
-          <Home />
-        </Suspense>
-      ),
-    },
-    {
-      path: "/create",
-      element: (
-        <Suspense>
-          <Create />
-        </Suspense>
-      ),
-    },
-    {
-      path: "/people",
-      element: (
-        <Suspense>
-          <People />
-        </Suspense>
-      ),
-    },
-    {
-      path: "/chats",
-      element: (
-        <Suspense>
-          <Chats />
-        </Suspense>
-      ),
-    },
-    {
-      path: "/explore",
-      element: (
-        <Suspense>
-          <Explore/>
-        </Suspense>
-      ),
-    },
-    {
-      path: "/saved",
-      element: (
-        <Suspense>
-          <Saved />
-        </Suspense>
-      ),
-    },
-    {
-      path: "/reels",
-      element: (
-        <Suspense>
-          <Reels />
-        </Suspense>
-      ),
-    },
-    {
-      path: "/chats",
-      element: (
-        <Suspense>
-          <Chats />
-        </Suspense>
-      ),
-    },
-  ]);
+  return (
+    <main className="grid grid-cols-12">
+      <LeftSidebar />
+      <div className="col-span-10">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/people" element={<People />} />
+          <Route path="/chats" element={<Chats />} />
+          <Route path="/explore" element={<Explore />} />
+          <Route path="/saved" element={<Saved />} />
+          <Route path="/reels" element={<Reels />} />
+          <Route path="/chats" element={<Chats />} />
+        </Routes>
+      </div>
+    </main>
+  );
 }
 
 export default DashboardRoutes;

@@ -8,8 +8,10 @@ const LeftSidebar = () => {
     : null;
   const { data: currentUserInfo } =
     useGetUserByUsernameQuery(currentUserUsername);
+    
+    
   return (
-    <div className="cols-aopn h-screen bg-black overflow-y-auto ">
+    <div className="col-span-2 h-screen bg-black overflow-y-auto ">
       <div className="pt-[48px] px-[24px] w-full h-[600px] text-white">
           <Link to={'/'} className="flex gap-[10px]"><img src={Logo} alt="logo"/>
           <h2 className="text-[28px] font-semibold">Snapgram</h2>
